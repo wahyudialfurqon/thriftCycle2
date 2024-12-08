@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:thriftcycle/wigedts/splashscreen.dart';
+//import 'package:thriftcycle/wigedts/splashscreen.dart';
 import '../screens/homepage.dart';
 import '../screens/detail_product.dart';
-import '../screens/time_line.dart';
+//import '../screens/time_line.dart';
 //import '../wigedts/steps_screen.dart';
 
 void main() {
@@ -10,9 +10,9 @@ void main() {
     MaterialApp(
       //home : StepsProgres(),
       //home: TimeLine(),
-     // home: HomePage(),
+      home: HomePage(),
       //home:DetailProduct()
-      home:Splashscreen()
+ //     home:Splashscreen()
 
     ),
   );
