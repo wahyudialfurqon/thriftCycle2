@@ -8,11 +8,16 @@ class Splashscreen extends StatefulWidget {
 }
 
 class _SplashscreenState extends State<Splashscreen> {
+  double _x1 = 300.0;
+  double _x2 = 350.0;
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds: 200), () {
-      setState(() {});
+    Future.delayed(const Duration(milliseconds: 1000), () {
+      setState(() {
+        _x1 = 800.0;
+        _x2 = -500.0;
+      });
     });
   }
 
@@ -32,29 +37,14 @@ class _SplashscreenState extends State<Splashscreen> {
                     curve: Curves.fastLinearToSlowEaseIn,
                     child: Stack(
                       children: [
-                        AnimatedPositioned(
-                          duration: const Duration(milliseconds: 5000),
-                          curve: Curves.fastLinearToSlowEaseIn,
-                          top: 0,
-                          left: -10,
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 5000),
-                            curve: Curves.ease,
-                            height: MediaQuery.of(context).size.height * 2,
-                            width: MediaQuery.of(context).size.width * 1,
-                            color: Colors.black,
-                            transform: Matrix4.identity()
-                              ..rotateZ(
-                                  -56) // Rotasi (dalam radian) untuk memiringkan container
-                              ..translate(
-                                  300.0, -400.0), // Pindahkan posisi container
-                          ),
+                        Center(
+                          child: Text("test"),
                         ),
                         AnimatedPositioned(
                           duration: const Duration(milliseconds: 5000),
                           curve: Curves.fastLinearToSlowEaseIn,
-                          top: -8,
-                          left: -430,
+                          top: 0,
+                          left: 65,
                           child: AnimatedContainer(
                             duration: const Duration(milliseconds: 5000),
                             curve: Curves.ease,
@@ -63,12 +53,29 @@ class _SplashscreenState extends State<Splashscreen> {
                             color: Colors.red,
                             transform: Matrix4.identity()
                               ..rotateZ(
-                                  0.500) // Rotasi (dalam radian) untuk memiringkan container
+                                  0.530) // Rotasi (dalam radian) untuk memiringkan container
                               ..translate(
-                                  330.0, -800.0), // Pindahkan posisi container
+                                  _x1, -400.0), // Pindahkan posisi container
                           ),
                         ),
-                        // )
+                        AnimatedPositioned(
+                          duration: const Duration(milliseconds: 5000),
+                          curve: Curves.fastLinearToSlowEaseIn,
+                          top: -8,
+                          left: -460,
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 5000),
+                            curve: Curves.ease,
+                            height: MediaQuery.of(context).size.height * 2,
+                            width: MediaQuery.of(context).size.width * 1,
+                            color: Colors.blue,
+                            transform: Matrix4.identity()
+                              ..rotateZ(
+                                  0.5250) // Rotasi (dalam radian55) untuk memiringkan container
+                              ..translate(
+                                  _x2, -500.0), // Pindahkan posisi container
+                          ),
+                        ),
                       ],
                     ),
                   ),
