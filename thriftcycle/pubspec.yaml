@@ -9,6 +9,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  curved_navigation_bar: ^1.0.6
+  flutter_native_splash: ^2.4.0
+  circle_nav_bar: ^2.1.1
 
 dev_dependencies:
   flutter_test:
