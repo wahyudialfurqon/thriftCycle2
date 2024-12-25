@@ -23,5 +23,5 @@ flutter:
 
   assets:
     - image/
-    - images/logo.png
-
+    - image/logo.png
+    - image/Profile_Default.png
