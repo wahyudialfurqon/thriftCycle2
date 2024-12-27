@@ -23,4 +23,9 @@ flutter:
 
   assets:
     - image/
+<<<<<<< HEAD
     - image/logo.png
+=======
+    - images/logo.png
+
+>>>>>>> 841707674f45d261eac63f9daad8d07eae635015

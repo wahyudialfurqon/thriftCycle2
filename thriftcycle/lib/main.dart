@@ -3,8 +3,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:thriftcycle/wigedts/splashscreen.dart';
 import '../screens/homepage.dart';
 import '../screens/detail_product.dart';
-import '../screens/time_line.dart';
-import '../wigedts/steps_screen.dart';
+
 
 void main() {
   runApp(
@@ -14,6 +13,7 @@ void main() {
         // home: HomePage(),
         //home:DetailProduct()
         home: Splashscreen()),
+    
   );
 }
 
