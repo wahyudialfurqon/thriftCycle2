@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:thriftcycle/screens/profile_screen.dart';
 import 'package:thriftcycle/wigedts/splashscreen.dart';
 import '../screens/homepage.dart';
 import '../screens/detail_product.dart';
@@ -12,8 +13,9 @@ void main() {
         //home: TimeLine(),
         // home: HomePage(),
         //home:DetailProduct()
-        home: Splashscreen()),
-    
+        home: Splashscreen()
+        // home: ProfileScreen(),
+        ),
   );
 }
 
@@ -33,7 +35,7 @@ class _HomeState extends State<Home> {
     Center(child: Text('Search Page')),
     Center(child: Text('Add Photo Page')),
     Center(child: Text('Bookmark Page')),
-    Center(child: Text('Profile Page')),
+   const ProfileScreen(),
   ];
 
   @override
