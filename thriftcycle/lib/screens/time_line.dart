@@ -24,7 +24,7 @@ class _TimeLineState extends State<TimeLine> {
     return Scaffold(
       body: Column(children: [
         Expanded(
-            child: PageView(
+            child: PageView( 
           children: [],
         )),
         StepsProgress(steps: 3, progress: 3),
