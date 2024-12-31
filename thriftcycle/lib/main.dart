@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:thriftcycle/screens/profile_screen.dart';
+import 'package:thriftcycle/screens/search_screen.dart';
+import 'package:thriftcycle/screens/uploadscreen.dart';
 import 'package:thriftcycle/wigedts/splashscreen.dart';
 import '../screens/homepage.dart';
+import '../screens/time_line.dart';
 import '../screens/detail_product.dart';
-import '../screens/edit_profile.dart';
 
 
 void main() {
@@ -14,11 +16,12 @@ void main() {
         //home: TimeLine(),
         // home: HomePage(),
         //home:DetailProduct()
-        // home: Splashscreen()
-        // home: ProfileScreen(),
-        home: EditProfileScreen(),
-        ),
-  );
+        /// home: Splashscreen(),
+        // home : UploadScreen(),
+        //  home: SearchScreen(),
+        home: ProfileScreen(),
+    
+  ));
 }
 
 class Home extends StatefulWidget {
@@ -37,7 +40,7 @@ class _HomeState extends State<Home> {
     Center(child: Text('Search Page')),
     Center(child: Text('Add Photo Page')),
     Center(child: Text('Bookmark Page')),
-   const ProfileScreen(),
+    SearchScreen(),
   ];
 
   @override

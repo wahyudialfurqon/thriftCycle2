@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:thriftcycle/screens/edit_profile.dart';
 
 void main() {
   runApp(const MyApp());
@@ -52,7 +53,13 @@ class ProfileScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20), 
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                // Navigate to edit profile screen
+               Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const EditProfileScreen()),
+                );
+              },
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,
                 backgroundColor: const Color(0xFF2C7C7D),
