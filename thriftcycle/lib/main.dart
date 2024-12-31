@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:thriftcycle/screens/uploadscreen.dart';
 import 'package:thriftcycle/wigedts/splashscreen.dart';
 import '../screens/homepage.dart';
+import '../screens/time_line.dart';
 import '../screens/detail_product.dart';
 
 
@@ -12,9 +14,10 @@ void main() {
         //home: TimeLine(),
         // home: HomePage(),
         //home:DetailProduct()
-        home: Splashscreen()),
+        /// home: Splashscreen(),
+        home : UploadScreen(),
     
-  );
+  ));
 }
 
 class Home extends StatefulWidget {

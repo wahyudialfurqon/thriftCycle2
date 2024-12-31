@@ -117,12 +117,11 @@ class _DetailProductState extends State<DetailProduct> {
                           color: isFavorite ? Colors.red : Colors.grey,
                           size: 24,
                         ),
-                        onPressed: () => {
+                        onPressed: () {
                           setState(() {
                             isFavorite = !isFavorite;
-                            }
-                          ),
-                        },
+                          });
+                        }
                       ),
                     ),
                   ),
