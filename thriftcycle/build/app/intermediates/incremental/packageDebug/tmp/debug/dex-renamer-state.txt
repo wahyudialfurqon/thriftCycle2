@@ -1,9 +1,9 @@
-#Tue Dec 31 15:47:11 ICT 2024
-base.0=D\:\\MK SEMESTER 3\\PAB 1\\final-project-team-thriftcycle\\thriftcycle\\build\\app\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
-base.1=D\:\\MK SEMESTER 3\\PAB 1\\final-project-team-thriftcycle\\thriftcycle\\build\\app\\intermediates\\dex\\debug\\mergeLibDexDebug\\0\\classes.dex
-base.2=D\:\\MK SEMESTER 3\\PAB 1\\final-project-team-thriftcycle\\thriftcycle\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
-base.3=D\:\\MK SEMESTER 3\\PAB 1\\final-project-team-thriftcycle\\thriftcycle\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\1\\classes.dex
-base.4=D\:\\MK SEMESTER 3\\PAB 1\\final-project-team-thriftcycle\\thriftcycle\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\6\\classes.dex
+#Tue Dec 31 18:05:05 WIB 2024
+base.0=C\:\\Project UAS\\final-project-team-thriftcycle\\thriftcycle\\build\\app\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
+base.1=C\:\\Project UAS\\final-project-team-thriftcycle\\thriftcycle\\build\\app\\intermediates\\dex\\debug\\mergeLibDexDebug\\0\\classes.dex
+base.2=C\:\\Project UAS\\final-project-team-thriftcycle\\thriftcycle\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
+base.3=C\:\\Project UAS\\final-project-team-thriftcycle\\thriftcycle\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\1\\classes.dex
+base.4=C\:\\Project UAS\\final-project-team-thriftcycle\\thriftcycle\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\6\\classes.dex
 path.0=classes.dex
 path.1=0/classes.dex
 path.2=0/classes.dex
