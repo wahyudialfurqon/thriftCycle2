@@ -36,7 +36,7 @@ class _HomeState extends State<Home> {
     Center(child: Text('Search Page')),
     Center(child: Text('Add Photo Page')),
     Center(child: Text('Bookmark Page')),
-    Center(child: Text('Profile Page')),
+   const ProfileScreen(),
   ];
 
   @override
