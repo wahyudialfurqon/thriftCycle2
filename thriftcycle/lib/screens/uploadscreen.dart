@@ -11,8 +11,11 @@ class UploadScreen extends StatefulWidget {
 }
 
 class _UploadScreenState extends State<UploadScreen> {
-
+  final TextEditingController _productController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
 
   final List<String> _items = [
     "otomotive",
@@ -26,9 +29,13 @@ class _UploadScreenState extends State<UploadScreen> {
   String? _selectedItem;
 
   void _unggahProduct() {
-    
+    print(_productController.text);
+    print(_nameController.text);
+    print(_selectedItem);
+    print(_addressController.text);
+    print(_phoneNumberController.text);
+    print(_descriptionController.text);
   }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +96,7 @@ class _UploadScreenState extends State<UploadScreen> {
                       height: 60,
                       width: 60,
                       decoration: BoxDecoration(
-                        color: Colors.grey,
+                        color: Color(0xFF164041),
                         borderRadius: BorderRadius.circular(50),
                       ),
                       child: IconButton(
@@ -98,8 +105,7 @@ class _UploadScreenState extends State<UploadScreen> {
                         onPressed: () {
                           setState(() {
                             print("Camera");
-                            }
-                          );
+                          });
                         },
                       ),
                     ),
@@ -129,8 +135,9 @@ class _UploadScreenState extends State<UploadScreen> {
                             color: Colors.grey[300],
                             borderRadius: BorderRadius.circular(16),
                           ),
-                          child: const TextField(
-                            decoration: InputDecoration(
+                          child: TextField(
+                            controller: _productController,
+                            decoration: const InputDecoration(
                               border: InputBorder.none,
                               hintText: 'Product Name',
                             ),
@@ -195,6 +202,7 @@ class _UploadScreenState extends State<UploadScreen> {
                   color: Colors.grey[300],
                 ),
                 child: TextField(
+                  controller: _nameController,
                   decoration: InputDecoration(
                     hintText: "Enter Name",
                     border: OutlineInputBorder(
@@ -220,6 +228,7 @@ class _UploadScreenState extends State<UploadScreen> {
                   color: Colors.grey[300],
                 ),
                 child: TextField(
+                  controller: _addressController,
                   decoration: InputDecoration(
                     hintText: "Enter Address",
                     border: OutlineInputBorder(
@@ -240,18 +249,24 @@ class _UploadScreenState extends State<UploadScreen> {
                 ),
               ),
               Container(
+                height: 50,
                 width: MediaQuery.of(context).size.width * 1,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.grey[300],
                 ),
-                child: TextField(
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    hintText: "Enter Phone Number",
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(16),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 34, right: 8),
+                  child: TextField(
+                    controller: _phoneNumberController,
+                    maxLength: 12,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      hintText: "Enter Phone Number",
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.circular(16),
+                      ),
                     ),
                   ),
                 ),
@@ -273,30 +288,41 @@ class _UploadScreenState extends State<UploadScreen> {
                   borderRadius: BorderRadius.circular(16),
                   color: Colors.grey[300],
                 ),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: "Enter Description",
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(16),
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 8, bottom: 7),
+                  child: TextField(
+                    controller: _descriptionController,
+                    maxLength: 500,
+                    maxLines: 10,
+                    decoration: InputDecoration(
+                      hintText: "Enter Description",
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.circular(16),
+                      ),
                     ),
                   ),
                 ),
               ),
               Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: Center(
-                      child: ElevatedButton(
+                padding: const EdgeInsets.only(top: 10),
+                child: Center(
+                  child: ElevatedButton(
                     onPressed: () {
                       _unggahProduct();
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
+                      backgroundColor: const Color(0xFF2C7C7D),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
                       ),
                     ),
-                    child: const Text("Upload Product"),
+                    child: const Text(
+                      "Upload Product",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                 ),
               ),
