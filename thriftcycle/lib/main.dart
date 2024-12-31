@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:thriftcycle/screens/profile_screen.dart';
 import 'package:thriftcycle/screens/search_screen.dart';
 import 'package:thriftcycle/screens/uploadscreen.dart';
 import 'package:thriftcycle/wigedts/splashscreen.dart';
@@ -17,7 +18,8 @@ void main() {
         //home:DetailProduct()
         /// home: Splashscreen(),
         // home : UploadScreen(),
-         home: SearchScreen(),
+        //  home: SearchScreen(),
+        home: ProfileScreen(),
     
   ));
 }
