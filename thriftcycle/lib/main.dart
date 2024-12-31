@@ -16,6 +16,7 @@ void main() {
         //home:DetailProduct()
         /// home: Splashscreen(),
         home : UploadScreen(),
+        //home : ProfileScreen(),
     
   ));
 }
@@ -36,7 +37,7 @@ class _HomeState extends State<Home> {
     Center(child: Text('Search Page')),
     Center(child: Text('Add Photo Page')),
     Center(child: Text('Bookmark Page')),
-   const ProfileScreen(),
+  
   ];
 
   @override
