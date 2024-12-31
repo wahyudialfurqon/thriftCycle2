@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:thriftcycle/main.dart';
+
 class UploadScreen extends StatefulWidget {
   const UploadScreen({super.key});
   _UploadScreenState crateState() => _UploadScreenState();
@@ -46,12 +48,18 @@ class _UploadScreenState extends State<UploadScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Icon(Icons.arrow_back),
-                  SizedBox(width: 80),
-                  Text(
+                  IconButton(
+                      onPressed: () {
+                        MaterialPageRoute(
+                          builder: (context) => const Home(),
+                        );
+                      },
+                      icon: const Icon(Icons.arrow_back)),
+                  const SizedBox(width: 80),
+                  const Text(
                     'Upload Product',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
