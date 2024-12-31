@@ -4,6 +4,7 @@ import 'package:thriftcycle/screens/profile_screen.dart';
 import 'package:thriftcycle/wigedts/splashscreen.dart';
 import '../screens/homepage.dart';
 import '../screens/detail_product.dart';
+import '../screens/edit_profile.dart';
 
 
 void main() {
@@ -13,8 +14,9 @@ void main() {
         //home: TimeLine(),
         // home: HomePage(),
         //home:DetailProduct()
-        home: Splashscreen()
+        // home: Splashscreen()
         // home: ProfileScreen(),
+        home: EditProfileScreen(),
         ),
   );
 }
