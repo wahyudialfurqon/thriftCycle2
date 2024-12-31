@@ -255,18 +255,14 @@ class _UploadScreenState extends State<UploadScreen> {
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.grey[300],
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 34, right: 8),
-                  child: TextField(
-                    controller: _phoneNumberController,
-                    maxLength: 12,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      hintText: "Enter Phone Number",
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(16),
-                      ),
+                child: TextField(
+                  controller: _phoneNumberController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    hintText: "Enter Phone Number",
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(16),
                     ),
                   ),
                 ),
