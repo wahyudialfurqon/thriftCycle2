@@ -8,7 +8,6 @@ import '../screens/homepage.dart';
 import '../screens/time_line.dart';
 import '../screens/detail_product.dart';
 
-
 void main() {
   runApp(
     MaterialApp(
@@ -16,13 +15,13 @@ void main() {
         //home: TimeLine(),
         // home: HomePage(),
         //home:DetailProduct()
-        /// home: Splashscreen(),
+         home: Splashscreen(),
         // home : UploadScreen(),
-        //  home: SearchScreen(),
-        home: ProfileScreen(),
+        // home: SearchScreen(),
     
   ));
 }
+
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -32,15 +31,17 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  bool visibleSplashScreen = true;
+
+
   final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
     Center(child: Hero(tag: "Dash", child: const HomePage())),
     Center(child: Text('Search Page')),
-    Center(child: Text('Add Photo Page')),
+    Center(child: Hero(tag: "Upload", child: const UploadScreen())),
     Center(child: Text('Bookmark Page')),
-    SearchScreen(),
   ];
 
   @override
@@ -49,7 +50,7 @@ class _HomeState extends State<Home> {
       body: _pages[_currentIndex], // Menampilkan halaman sesuai indeks
       bottomNavigationBar: CurvedNavigationBar(
         key: _bottomNavigationKey,
-        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: const Color(0x2C7C7D),
         buttonBackgroundColor: const Color(0xFF2C7C7D),
         color: const Color(0xFF2C7C7D),
         animationCurve: Curves.fastEaseInToSlowEaseOut,
