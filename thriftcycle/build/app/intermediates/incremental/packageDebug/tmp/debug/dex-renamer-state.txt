@@ -1,4 +1,4 @@
-#Tue Dec 31 15:47:11 ICT 2024
+#Tue Dec 31 19:02:07 ICT 2024
 base.0=D\:\\MK SEMESTER 3\\PAB 1\\final-project-team-thriftcycle\\thriftcycle\\build\\app\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 base.1=D\:\\MK SEMESTER 3\\PAB 1\\final-project-team-thriftcycle\\thriftcycle\\build\\app\\intermediates\\dex\\debug\\mergeLibDexDebug\\0\\classes.dex
 base.2=D\:\\MK SEMESTER 3\\PAB 1\\final-project-team-thriftcycle\\thriftcycle\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
