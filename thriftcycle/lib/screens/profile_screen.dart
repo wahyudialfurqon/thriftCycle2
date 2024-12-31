@@ -64,14 +64,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
             final updatedUsername = await Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const EditProfileScreen(),
+                builder: (context) =>
+                EditProfileScreen(initialUsername: currentUsername),
               ),
             );
-            if (updatedUsername != null) {
-              setState(() {
-                currentUsername = updatedUsername;
-              });
-            }
+            if (updatedUsername != null && updatedUsername != currentUsername) {
+                  setState(() {
+                    currentUsername = updatedUsername; 
+                  });
+                }
           },
           style: ElevatedButton.styleFrom(
             foregroundColor: Colors.white,

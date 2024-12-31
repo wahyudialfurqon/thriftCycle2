@@ -11,13 +11,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: EditProfileScreen(),
+      home: EditProfileScreen(initialUsername: '',),
     );
   }
 }
 
 class EditProfileScreen extends StatefulWidget {
-  const EditProfileScreen({Key? key}) : super(key: key);
+   final String initialUsername;
+  const EditProfileScreen({Key? key, required this.initialUsername}) : super(key: key);
 
   @override
   _EditProfileScreenState createState() => _EditProfileScreenState();
@@ -25,29 +26,29 @@ class EditProfileScreen extends StatefulWidget {
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
   bool isEditing = false;
-  TextEditingController usernameController = TextEditingController();
-  String currentUsername = 'user1234';
+  late TextEditingController usernameController;
   bool isUsernameEmpty = false;
 
-  @override
+   @override
   void initState() {
     super.initState();
-    usernameController.text = currentUsername;
+    usernameController = TextEditingController(text: widget.initialUsername);
   }
 
-  void saveChanges() {
-  if (usernameController.text.trim().isEmpty) {
+ void saveChanges() {
+    if (usernameController.text.trim().isEmpty) {
+      setState(() {
+        isUsernameEmpty = true;
+      });
+      return;
+    }
+
     setState(() {
-      isUsernameEmpty = true;
+      isUsernameEmpty = false;
     });
-    return;
-  }
 
-  setState(() {
-    isUsernameEmpty = false;
-  });
-  Navigator.pop(context, usernameController.text);
-}
+    Navigator.pop(context, usernameController.text);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +62,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             const Text(
-              'Profile',
+              'Edit Profile',
               style: TextStyle(
                 fontSize: 17,
                 fontWeight: FontWeight.bold,
@@ -114,7 +115,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                       )
                     : Text(
-                        currentUsername,
+                        usernameController.text,
                         style: const TextStyle(
                           fontSize: 17,
                           fontWeight: FontWeight.bold,
