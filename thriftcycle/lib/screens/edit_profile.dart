@@ -36,19 +36,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 
   void saveChanges() {
-    if (usernameController.text.trim().isEmpty) {
-      setState(() {
-        isUsernameEmpty = true;
-      });
-      return;
-    }
-
+  if (usernameController.text.trim().isEmpty) {
     setState(() {
-      currentUsername = usernameController.text;
-      isEditing = false;
-      isUsernameEmpty = false;
+      isUsernameEmpty = true;
     });
+    return;
   }
+
+  setState(() {
+    isUsernameEmpty = false;
+  });
+  Navigator.pop(context, usernameController.text);
+}
 
   @override
   Widget build(BuildContext context) {

@@ -17,11 +17,18 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 
   @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+   String currentUsername = 'user1234';
+  @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -44,28 +51,34 @@ class ProfileScreen extends StatelessWidget {
               backgroundImage: AssetImage('image/Profile_Default.png'), 
             ),
             const SizedBox(height: 20),
-            const Text(
-              'user1234',
-              style: TextStyle(
-                fontSize: 17,
-                fontWeight: FontWeight.bold,
-              ),
+           Text(
+            currentUsername,
+            style: const TextStyle(
+              fontSize: 17,
+              fontWeight: FontWeight.bold,
             ),
-            const SizedBox(height: 20), 
-            ElevatedButton(
-              onPressed: () {
-                // Navigate to edit profile screen
-               Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const EditProfileScreen()),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.white,
-                backgroundColor: const Color(0xFF2C7C7D),
+          ),
+                      const SizedBox(height: 20), 
+          ElevatedButton(
+          onPressed: () async {
+            final updatedUsername = await Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const EditProfileScreen(),
               ),
-              child: const Text('Edit Profile'),
-            ),
+            );
+            if (updatedUsername != null) {
+              setState(() {
+                currentUsername = updatedUsername;
+              });
+            }
+          },
+          style: ElevatedButton.styleFrom(
+            foregroundColor: Colors.white,
+            backgroundColor: const Color(0xFF2C7C7D),
+          ),
+          child: const Text('Edit Profile'),
+        ),
           ],
         ),
       ),
