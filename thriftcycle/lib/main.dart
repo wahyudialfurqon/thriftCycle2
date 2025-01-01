@@ -3,6 +3,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:thriftcycle/screens/profile_screen.dart';
 import 'package:thriftcycle/screens/search_screen.dart';
 import 'package:thriftcycle/screens/uploadscreen.dart';
+import 'package:thriftcycle/screens/favorite_screen.dart';
 import 'package:thriftcycle/wigedts/splashscreen.dart';
 import '../screens/homepage.dart';
 import '../screens/time_line.dart';
@@ -18,6 +19,7 @@ void main() {
          home: Splashscreen(),
         // home : UploadScreen(),
         // home: SearchScreen(),
+        // home: FavoriteScreen(),
     
   ));
 }
@@ -39,9 +41,10 @@ class _HomeState extends State<Home> {
 
   final List<Widget> _pages = [
     Center(child: Hero(tag: "Dash", child: const HomePage())),
-    Center(child: Text('Search Page')),
+    Center(child: Hero(tag:'Search Page', child: SearchScreen())),
     Center(child: Hero(tag: "Upload", child: const UploadScreen())),
-    Center(child: Text('Bookmark Page')),
+    Center(child: Hero(tag: "Bookmark", child: const FavoriteScreen())),
+    Center(child: Hero(tag: "Profile", child: const ProfileScreen())),
   ];
 
   @override
