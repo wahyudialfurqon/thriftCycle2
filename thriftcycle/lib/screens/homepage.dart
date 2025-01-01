@@ -1,7 +1,8 @@
-import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import './detail_product.dart';
-import 'package:thriftcycle/wigedts/splashscreen.dart';
+import '../wigedts/listcategory.dart';
+import '../service/category.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,7 +12,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String productName = "Baju Mu berubang";
+
+  String productName = "Jersey Manchester United";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -185,48 +187,16 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
+            // TODO: List Category
                   SizedBox(
-                    height: 150,
+                    height: 70,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: 7,
+                      shrinkWrap: true,
+                      itemCount: categories.length,
                       itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(5),
-                          child: Container(
-                            width: 90,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.2),
-                                  blurRadius: 5,
-                                  offset: const Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            child: const Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image(
-                                    image: AssetImage("image/logo.png"),
-                                    width: 60,
-                                    height: 60,
-                                  ),
-                                  Text(
-                                    "Baju",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w300,
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        );
+                        final category = categories[index];
+                        return ListCategory( category: category);;
                       },
                     ),
                   ),
@@ -252,6 +222,7 @@ class _HomePageState extends State<HomePage> {
                       thickness: 1,
                     ),
                   ),
+            //TODO : List Product
                   SizedBox(
                     height: 400,
                     child: GridView.builder(
@@ -261,8 +232,8 @@ class _HomePageState extends State<HomePage> {
                             const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           mainAxisSpacing: 2,
-                          crossAxisSpacing: 2,
-                          childAspectRatio: 1,
+                          crossAxisSpacing: 0,
+                          childAspectRatio: 0.95,
                         ),
                         itemBuilder: (context, index) => InkWell(
                             onTap: () {
@@ -273,8 +244,6 @@ class _HomePageState extends State<HomePage> {
                                           const DetailProduct()));
                             },
                             child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 2),
                                 margin: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
@@ -302,34 +271,40 @@ class _HomePageState extends State<HomePage> {
                                       padding: const EdgeInsets.all(5),
                                       child: Row(
                                         children: [
-                                          Container(
-                                              width: 5,
-                                              height: 50,
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                color: Colors.black,
-                                              )),
                                           Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 5),
+                                            padding: const EdgeInsets.only(
+                                                left: 5, top: 5),
+                                            child: Container(
+                                                width: 5,
+                                                height: 50,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  color: Colors.black,
+                                                )),
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                                left: 10, top: 5),
                                             child: Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  "Jersey Manchester United",
-                                                
+                                                  productName.length > 9
+                                                      ? productName.substring(
+                                                              0, 10) +
+                                                          "..."
+                                                      : productName,
                                                   style: TextStyle(
-                                                    
-                                                    fontFamily: 'Poppins',
+                                                    fontFamily: 'Rewals',
                                                     fontSize: 20,
                                                   ),
                                                 ),
                                                 Text(
                                                   "Coash",
                                                   style: TextStyle(
-                                                    fontWeight: FontWeight.w300,
+                                                    fontWeight: FontWeight.w700,
                                                     fontSize: 15,
                                                   ),
                                                 ),

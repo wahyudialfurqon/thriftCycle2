@@ -25,7 +25,8 @@ class _UploadScreenState extends State<UploadScreen> {
     "electronic",
     "stationary",
     "toys",
-    "sport"
+    "sports style"
+    "furniture",
   ];
 
   String? _selectedItem;
@@ -52,12 +53,15 @@ class _UploadScreenState extends State<UploadScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   IconButton(
-                      onPressed: () {
-                        MaterialPageRoute(
-                          builder: (context) => const Home(),
-                        );
-                      },
-                      icon: const Icon(Icons.arrow_back)),
+                    icon: const Icon(Icons.arrow_back),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Home(),
+                          ));
+                    },
+                  ),
                   const SizedBox(width: 80),
                   const Text(
                     'Upload Product',
@@ -166,8 +170,8 @@ class _UploadScreenState extends State<UploadScreen> {
                         const SizedBox(height: 8),
                         Container(
                             height: 50,
-                            width: 190,
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            width: 180,
+                            padding: const EdgeInsets.symmetric(horizontal: 3),
                             decoration: BoxDecoration(
                               color: Colors.grey[300],
                               borderRadius: BorderRadius.circular(16),
