@@ -1,6 +1,7 @@
-import 'package:flutter/foundation.dart';
+import 'dart:io';
 import 'package:flutter/material.dart';
-import './detail_product.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:thriftcycle/screens/detail_product.dart';
 import '../wigedts/listcategory.dart';
 import '../service/category.dart';
 
@@ -12,8 +13,36 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
+  String currentUsername = 'user1234';
+  File? profileImage;
   String productName = "Jersey Manchester United";
+
+    @override
+  void initState() {
+    super.initState();
+    _loadProfileData();
+    _saveProfileData();
+  }
+
+    Future<void> _loadProfileData() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      currentUsername = prefs.getString('username') ?? 'user1234';
+      final imagePath = prefs.getString('profileImage');
+      if (imagePath != null) {
+        profileImage = File(imagePath);
+      }
+    });
+  }
+
+    Future<void> _saveProfileData() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('username', currentUsername);
+    if (profileImage != null) {
+      await prefs.setString('profileImage', profileImage!.path);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +72,7 @@ class _HomePageState extends State<HomePage> {
                         height: 40,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: Colors.red,
+                          color: const Color(0xFF2C7C7D),
                         ),
                         child: IconButton(
                           icon: const Icon(Icons.person, color: Colors.white),
@@ -51,45 +80,34 @@ class _HomePageState extends State<HomePage> {
                             showDialog(
                               context: context,
                               barrierDismissible: true,
-                              barrierColor: Colors.black.withOpacity(0.5),
+                              barrierColor: const Color.fromARGB(255, 255, 255, 255).withOpacity(0.9),
                               builder: (BuildContext context) {
                                 return Dialog(
-                                  backgroundColor:
-                                      Colors.white.withOpacity(0.9),
+                                  backgroundColor: Colors.transparent,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20),
                                   ),
-                                  child: const SizedBox(
+                                  child: SizedBox(
                                     height: 300,
                                     width: 300,
                                     child: Center(
                                       child: Column(
-                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.start,
                                         children: [
                                           CircleAvatar(
-                                            radius: 50,
-                                            backgroundImage:
-                                                AssetImage("image/avatar.png"),
+                                            radius: 70,
+                                            backgroundImage: profileImage == null
+                                                ? const AssetImage("image/Profile_Default.png")
+                                                    as ImageProvider
+                                                : FileImage(profileImage!),
                                           ),
-                                          SizedBox(
-                                            height: 5,
-                                            width: 200,
-                                            child: Divider(
-                                              color: Colors.black26,
-                                            ),
-                                          ),
-                                          Text("user1234",
-                                              style: TextStyle(fontSize: 18)),
-                                          SizedBox(height: 1),
-                                          Text("8LlMh@example.com",
-                                              style: TextStyle(fontSize: 16)),
-                                          SizedBox(height: 10),
-                                          InkWell(
-                                            child: Text(
-                                              "Edit",
-                                              style: TextStyle(
-                                                  fontSize: 16,
-                                                  color: Colors.blue),
+                                          const SizedBox(height: 30),
+                                          Text(
+                                            currentUsername,
+                                            style: const TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                           ),
                                         ],
@@ -284,7 +302,7 @@ class _HomePageState extends State<HomePage> {
                                                 )),
                                           ),
                                           Padding(
-                                            padding: EdgeInsets.only(
+                                            padding: const EdgeInsets.only(
                                                 left: 10, top: 5),
                                             child: Column(
                                               crossAxisAlignment:
@@ -296,12 +314,12 @@ class _HomePageState extends State<HomePage> {
                                                               0, 10) +
                                                           "..."
                                                       : productName,
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     fontFamily: 'Rewals',
                                                     fontSize: 20,
                                                   ),
                                                 ),
-                                                Text(
+                                                const Text(
                                                   "Coash",
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.w700,
