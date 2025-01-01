@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.thriftcycle.app-mergeDebugResources-24:/values-night-v8/values-night-v8.xml",
+            "outputFile": "com.example.thriftcycle.app-mergeDebugResources-4:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "D:\\MK SEMESTER 3\\PAB 1\\final-project-team-thriftcycle\\thriftcycle\\android\\app\\src\\main\\res\\values-night\\styles.xml",
+                    "source": "C:\\Project UAS\\final-project-team-thriftcycle\\thriftcycle\\android\\app\\src\\main\\res\\values-night\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
