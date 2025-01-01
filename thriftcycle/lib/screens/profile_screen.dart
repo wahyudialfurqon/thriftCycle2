@@ -28,7 +28,8 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   String currentUsername = 'user1234';
   File? profileImage;
-  
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -16,10 +16,10 @@ void main() {
         //home: TimeLine(),
         // home: HomePage(),
         //home:DetailProduct()
-        /// home: Splashscreen(),
+        home: Splashscreen(),
         // home : UploadScreen(),
         //  home: SearchScreen(),
-        home: ProfileScreen(),
+        // home: ProfileScreen(),
     
   ));
 }
@@ -37,10 +37,10 @@ class _HomeState extends State<Home> {
 
   final List<Widget> _pages = [
     Center(child: Hero(tag: "Dash", child: const HomePage())),
-    Center(child: Text('Search Page')),
+    SearchScreen(),
     Center(child: Text('Add Photo Page')),
     Center(child: Text('Bookmark Page')),
-    SearchScreen(),
+    ProfileScreen()
   ];
 
   @override
