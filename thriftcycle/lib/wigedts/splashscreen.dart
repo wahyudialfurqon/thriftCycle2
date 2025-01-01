@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:thriftcycle/main.dart';
 
@@ -41,7 +43,7 @@ class _SplashscreenState extends State<Splashscreen> {
         _opacity = 1;
       });
     });
-    Future.delayed(const Duration(milliseconds: 8000), () {
+    Timer(const Duration(milliseconds: 8000), () {
       setState(() {
             Navigator.push(
         context,

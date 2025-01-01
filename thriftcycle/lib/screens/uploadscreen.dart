@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:thriftcycle/main.dart';
+
 class UploadScreen extends StatefulWidget {
   const UploadScreen({super.key});
   _UploadScreenState crateState() => _UploadScreenState();
@@ -23,7 +25,8 @@ class _UploadScreenState extends State<UploadScreen> {
     "electronic",
     "stationary",
     "toys",
-    "sport"
+    "sports style"
+    "furniture",
   ];
 
   String? _selectedItem;
@@ -46,12 +49,21 @@ class _UploadScreenState extends State<UploadScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Icon(Icons.arrow_back),
-                  SizedBox(width: 80),
-                  Text(
+                  IconButton(
+                    icon: const Icon(Icons.arrow_back),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Home(),
+                          ));
+                    },
+                  ),
+                  const SizedBox(width: 80),
+                  const Text(
                     'Upload Product',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
@@ -158,8 +170,8 @@ class _UploadScreenState extends State<UploadScreen> {
                         const SizedBox(height: 8),
                         Container(
                             height: 50,
-                            width: 190,
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            width: 180,
+                            padding: const EdgeInsets.symmetric(horizontal: 3),
                             decoration: BoxDecoration(
                               color: Colors.grey[300],
                               borderRadius: BorderRadius.circular(16),
@@ -255,18 +267,14 @@ class _UploadScreenState extends State<UploadScreen> {
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.grey[300],
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 34, right: 8),
-                  child: TextField(
-                    controller: _phoneNumberController,
-                    maxLength: 12,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      hintText: "Enter Phone Number",
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(16),
-                      ),
+                child: TextField(
+                  controller: _phoneNumberController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    hintText: "Enter Phone Number",
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(16),
                     ),
                   ),
                 ),

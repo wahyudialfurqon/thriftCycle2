@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../screens/homepage.dart';
+import '../main.dart';
 
 class DetailProduct extends StatefulWidget {
   const DetailProduct({super.key});
@@ -25,10 +26,8 @@ class _DetailProductState extends State<DetailProduct> {
                     Icons.arrow_back,
                   ),
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const HomePage()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Home()));
                   },
                 ),
               ],
@@ -112,17 +111,16 @@ class _DetailProductState extends State<DetailProduct> {
                         ),
                       ),
                       child: IconButton(
-                        icon: Icon(
-                          Icons.favorite,
-                          color: isFavorite ? Colors.red : Colors.grey,
-                          size: 24,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            isFavorite = !isFavorite;
-                          });
-                        }
-                      ),
+                          icon: Icon(
+                            Icons.favorite,
+                            color: isFavorite ? Colors.red : Colors.grey,
+                            size: 24,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              isFavorite = !isFavorite;
+                            });
+                          }),
                     ),
                   ),
                 ],

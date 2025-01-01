@@ -1,5 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
+import './detail_product.dart';
+import '../wigedts/listcategory.dart';
+import '../service/category.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -10,6 +13,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
+  String productName = "Jersey Manchester United";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -162,7 +166,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             const Padding(
-              padding: EdgeInsets.all(15),
+              padding: EdgeInsets.all(20),
               child: Center(
                 child: Image(
                   image: AssetImage("image/Bar_information.png"),
@@ -170,7 +174,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 35),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: [
                   const Align(
@@ -183,48 +187,16 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
+            // TODO: List Category
                   SizedBox(
-                    height: 150,
+                    height: 70,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: 7,
+                      shrinkWrap: true,
+                      itemCount: categories.length,
                       itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(5),
-                          child: Container(
-                            width: 90,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.2),
-                                  blurRadius: 5,
-                                  offset: const Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            child: const Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image(
-                                    image: AssetImage("image/logo.png"),
-                                    width: 60,
-                                    height: 60,
-                                  ),
-                                  Text(
-                                    "Baju",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w300,
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        );
+                        final category = categories[index];
+                        return ListCategory( category: category);;
                       },
                     ),
                   ),
@@ -232,7 +204,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: [
                   const Align(
@@ -250,33 +222,98 @@ class _HomePageState extends State<HomePage> {
                       thickness: 1,
                     ),
                   ),
+            //TODO : List Product
                   SizedBox(
-                    height: 450,
+                    height: 400,
                     child: GridView.builder(
-                      scrollDirection: Axis.vertical,
-                      itemCount: 10,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 2,
-                        crossAxisSpacing: 2,
-                        childAspectRatio: 1,
-                      ),
-                      itemBuilder: (context, index) => Container(
-                        margin: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.2),
-                              blurRadius: 5,
-                              offset: const Offset(0, 2),
-                            ),
-                          ],
+                        scrollDirection: Axis.vertical,
+                        itemCount: 10,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 2,
+                          crossAxisSpacing: 0,
+                          childAspectRatio: 0.95,
                         ),
-                      ),
-                    ),
+                        itemBuilder: (context, index) => InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const DetailProduct()));
+                            },
+                            child: Container(
+                                margin: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.2),
+                                      blurRadius: 5,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: Column(children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: const Image(
+                                      image: NetworkImage(
+                                          "https://s4.bukalapak.com/img/9766095992/w-1000/LOKAL_Jersey_Baju_MU_Manchester_United_Home_Merah_2018_2019_.jpg"),
+                                      width: 300,
+                                      height: 100,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                  Padding(
+                                      padding: const EdgeInsets.all(5),
+                                      child: Row(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 5, top: 5),
+                                            child: Container(
+                                                width: 5,
+                                                height: 50,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  color: Colors.black,
+                                                )),
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                                left: 10, top: 5),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  productName.length > 9
+                                                      ? productName.substring(
+                                                              0, 10) +
+                                                          "..."
+                                                      : productName,
+                                                  style: TextStyle(
+                                                    fontFamily: 'Rewals',
+                                                    fontSize: 20,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  "Coash",
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.w700,
+                                                    fontSize: 15,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ))
+                                ])))),
                   ),
                 ],
               ),

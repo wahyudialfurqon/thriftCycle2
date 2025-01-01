@@ -3,11 +3,11 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:thriftcycle/screens/profile_screen.dart';
 import 'package:thriftcycle/screens/search_screen.dart';
 import 'package:thriftcycle/screens/uploadscreen.dart';
+import 'package:thriftcycle/screens/favorite_screen.dart';
 import 'package:thriftcycle/wigedts/splashscreen.dart';
 import '../screens/homepage.dart';
 import '../screens/time_line.dart';
 import '../screens/detail_product.dart';
-
 
 void main() {
   runApp(
@@ -20,9 +20,13 @@ void main() {
         // home : UploadScreen(),
         //  home: SearchScreen(),
         // home: ProfileScreen(),
+        // home : UploadScreen(),
+        // home: SearchScreen(),
+        // home: FavoriteScreen(),
     
   ));
 }
+
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -32,14 +36,17 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  bool visibleSplashScreen = true;
+
+
   final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
     Center(child: Hero(tag: "Dash", child: const HomePage())),
     SearchScreen(),
-    Center(child: Text('Add Photo Page')),
-    Center(child: Text('Bookmark Page')),
+    const Center(child: Hero(tag: "Upload", child: UploadScreen())),
+    Center(child: Text('Your Favorites')),
     ProfileScreen()
   ];
 
@@ -49,34 +56,34 @@ class _HomeState extends State<Home> {
       body: _pages[_currentIndex], // Menampilkan halaman sesuai indeks
       bottomNavigationBar: CurvedNavigationBar(
         key: _bottomNavigationKey,
-        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: const Color(0x2C7C7D),
         buttonBackgroundColor: const Color(0xFF2C7C7D),
         color: const Color(0xFF2C7C7D),
         animationCurve: Curves.fastEaseInToSlowEaseOut,
         height: 45,
         animationDuration: const Duration(milliseconds: 800),
-        items: <Widget>[
+        items: const <Widget>[
           Icon(
             Icons.home,
             size: 30,
             color: Colors.white,
           ),
-          const Icon(
+          Icon(
             Icons.search,
             size: 30,
             color: Colors.white,
           ),
-          const Icon(
+          Icon(
             Icons.add_a_photo,
             size: 30,
             color: Colors.white,
           ),
-          const Icon(
-            Icons.bookmark,
+          Icon(
+            Icons.favorite,
             size: 30,
             color: Colors.white,
           ),
-          const Icon(
+          Icon(
             Icons.person_2_sharp,
             size: 30,
             color: Colors.white,
