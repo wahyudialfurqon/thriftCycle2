@@ -16,7 +16,10 @@ void main() {
         //home: TimeLine(),
         // home: HomePage(),
         //home:DetailProduct()
-         home: Splashscreen(),
+        home: Splashscreen(),
+        // home : UploadScreen(),
+        //  home: SearchScreen(),
+        // home: ProfileScreen(),
         // home : UploadScreen(),
         // home: SearchScreen(),
         // home: FavoriteScreen(),
@@ -41,10 +44,10 @@ class _HomeState extends State<Home> {
 
   final List<Widget> _pages = [
     Center(child: Hero(tag: "Dash", child: const HomePage())),
-    Center(child: Hero(tag:'Search Page', child: SearchScreen())),
-    Center(child: Hero(tag: "Upload", child: const UploadScreen())),
-    Center(child: Hero(tag: "Bookmark", child: const FavoriteScreen())),
-    Center(child: Hero(tag: "Profile", child: const ProfileScreen())),
+    SearchScreen(),
+    const Center(child: Hero(tag: "Upload", child: UploadScreen())),
+    Center(child: Text('Your Favorites')),
+    ProfileScreen()
   ];
 
   @override
@@ -59,28 +62,28 @@ class _HomeState extends State<Home> {
         animationCurve: Curves.fastEaseInToSlowEaseOut,
         height: 45,
         animationDuration: const Duration(milliseconds: 800),
-        items: <Widget>[
+        items: const <Widget>[
           Icon(
             Icons.home,
             size: 30,
             color: Colors.white,
           ),
-          const Icon(
+          Icon(
             Icons.search,
             size: 30,
             color: Colors.white,
           ),
-          const Icon(
+          Icon(
             Icons.add_a_photo,
             size: 30,
             color: Colors.white,
           ),
-          const Icon(
-            Icons.bookmark,
+          Icon(
+            Icons.favorite,
             size: 30,
             color: Colors.white,
           ),
-          const Icon(
+          Icon(
             Icons.person_2_sharp,
             size: 30,
             color: Colors.white,

@@ -1,24 +1,16 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
-
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: EditProfileScreen(initialUsername: '',),
-    );
-  }
-}
+import 'package:image_picker/image_picker.dart';
 
 class EditProfileScreen extends StatefulWidget {
-   final String initialUsername;
-  const EditProfileScreen({Key? key, required this.initialUsername}) : super(key: key);
+  final String initialUsername;
+  final File? initialProfileImage;
+
+  const EditProfileScreen({
+    Key? key,  
+    required this.initialUsername,
+    required this.initialProfileImage,
+  }) : super(key: key);
 
   @override
   _EditProfileScreenState createState() => _EditProfileScreenState();
@@ -28,14 +20,72 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   bool isEditing = false;
   late TextEditingController usernameController;
   bool isUsernameEmpty = false;
+  File? profileImage;
+  bool isProfileImageChanged = false;
 
-   @override
+  @override
   void initState() {
     super.initState();
     usernameController = TextEditingController(text: widget.initialUsername);
+    profileImage = widget.initialProfileImage;
   }
 
- void saveChanges() {
+  Future<void> pickImage() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? selectedImage = await showModalBottomSheet<XFile>(
+      context: context,
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+        return Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                'Pilih Sumber Gambar',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    onPressed: () async {
+                      final image = await picker.pickImage(source: ImageSource.camera);
+                      Navigator.pop(context, image);
+                    },
+                    icon: const Icon(Icons.camera_alt),
+                    iconSize: 50,
+                  ),
+                  const SizedBox(width: 30),
+                  IconButton(
+                    onPressed: () async {
+                      final image = await picker.pickImage(source: ImageSource.gallery);
+                      Navigator.pop(context, image);
+                    },
+                    icon: const Icon(Icons.photo_album),
+                    iconSize: 50,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
+
+    if (selectedImage != null) {
+      setState(() {
+        profileImage = File(selectedImage.path);
+        isProfileImageChanged = true;
+      });
+    }
+  }
+
+  void saveChanges() {
     if (usernameController.text.trim().isEmpty) {
       setState(() {
         isUsernameEmpty = true;
@@ -47,7 +97,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       isUsernameEmpty = false;
     });
 
-    Navigator.pop(context, usernameController.text);
+    String updatedUsername = usernameController.text.trim();
+    File? updatedProfileImage = profileImage;
+
+    Navigator.pop(context, {
+      'username': updatedUsername,
+      'profileImage': updatedProfileImage,
+    });
   }
 
   @override
@@ -72,12 +128,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             Stack(
               alignment: Alignment.bottomRight,
               children: [
-                const CircleAvatar(
+                CircleAvatar(
                   radius: 65,
-                  backgroundImage: AssetImage('image/Profile_Default.png'),
+                  backgroundImage: profileImage == null
+                      ? const AssetImage('image/Profile_Default.png')
+                      : FileImage(profileImage!) as ImageProvider,
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: pickImage,
                   icon: const Icon(
                     Icons.camera_alt,
                     color: Colors.white,
@@ -142,7 +200,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: isEditing ? saveChanges : null,
+              onPressed: isEditing || isProfileImageChanged ? saveChanges : null,
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,
                 backgroundColor: const Color(0xFF2C7C7D),
