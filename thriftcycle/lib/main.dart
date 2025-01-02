@@ -46,7 +46,7 @@ class _HomeState extends State<Home> {
     Center(child: Hero(tag: "Dash", child: const HomePage())),
     SearchScreen(),
     const Center(child: Hero(tag: "Upload", child: UploadScreen())),
-    Center(child: Text('Your Favorites')),
+    Center(child: Hero(tag: "Favorite", child: const FavoriteScreen())),
     ProfileScreen()
   ];
 
