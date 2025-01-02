@@ -259,7 +259,7 @@ class _HomePageState extends State<HomePage> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const DetailProduct()));
+                                          const DetailProduct(product: {},)));
                             },
                             child: Container(
                                 margin: const EdgeInsets.all(10),
