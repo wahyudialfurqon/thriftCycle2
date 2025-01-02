@@ -4,26 +4,27 @@ class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({super.key});
 
   @override
-  State<FavoriteScreen> createState() => _FavoriteScreenState();
+  _FavoriteScreenState createState() => _FavoriteScreenState();
 }
 
 class _FavoriteScreenState extends State<FavoriteScreen> {
-  List<Map<String, dynamic>> favoriteItems = [
-    {
-      "name": "Baju Batik MU",
-      "imageUrl":
-          "https://3.bp.blogspot.com/-RU5Mx3pA_DA/T3qtuStvLMI/AAAAAAAAATk/lBsHPUgIn00/s1600/danil+babol+mu-6.jpg",
+  // Simulasi daftar item favorite
+  final List<Map<String, dynamic>> _favoriteItems = List.generate(
+    6,
+    (index) => {
+      'id': index,
+      'title': 'Favorite Item ${index + 1}',
+      'category': index % 2 == 0 ? 'Stationery' : 'Clothes',
+      'isFavorite': true,
     },
-    {
-      "name": "Kemeja Batik Solo",
-      "imageUrl":
-          "https://asset.kompas.com/crops/vxDS6EXoOszoJu_rY2NEfQoC4iY=/0x0:1000x667/750x500/data/photo/2022/11/25/63800dc339b10.jpg",
-    },
-  ];
+  );
 
-  void removeFavorite(int index) {
+  void _toggleFavorite(int id) {
     setState(() {
-      favoriteItems.removeAt(index);
+      final itemIndex = _favoriteItems.indexWhere((item) => item['id'] == id);
+      if (itemIndex != -1) {
+        _favoriteItems[itemIndex]['isFavorite'] = !_favoriteItems[itemIndex]['isFavorite'];
+      }
     });
   }
 
@@ -31,41 +32,109 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Favorites"),
-        backgroundColor: const Color(0xFF2C7C7D),
+        title: const Text("Favorite Items"),
+        backgroundColor: Colors.teal,
       ),
-      body: favoriteItems.isEmpty
-          ? const Center(
-              child: Text(
-                "Tidak ada item favorit",
-                style: TextStyle(fontSize: 16, color: Colors.grey),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              "Favorite",
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
               ),
-            )
-          : ListView.builder(
-              itemCount: favoriteItems.length,
-              itemBuilder: (context, index) {
-                final item = favoriteItems[index];
-                return Card(
-                  margin: const EdgeInsets.symmetric(
-                      horizontal: 10, vertical: 5),
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundImage: NetworkImage(item["imageUrl"]),
-                    ),
-                    title: Text(item["name"]),
-                    trailing: IconButton(
-                      icon: const Icon(
-                        Icons.favorite,
-                        color: Colors.red,
-                      ),
-                      onPressed: () {
-                        removeFavorite(index);
-                      },
-                    ),
-                  ),
-                );
-              },
             ),
+            const Text(
+              "Your Favorites Here",
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.grey,
+              ),
+            ),
+            const SizedBox(height: 20),
+            Expanded(
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                  childAspectRatio: 0.75,
+                ),
+                itemCount: _favoriteItems.where((item) => item['isFavorite']).length,
+                itemBuilder: (context, index) {
+                  final visibleFavorites = _favoriteItems.where((item) => item['isFavorite']).toList();
+                  final item = visibleFavorites[index];
+                  return Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.3),
+                          blurRadius: 5,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ClipRRect(
+                          borderRadius: const BorderRadius.vertical(
+                            top: Radius.circular(10),
+                          ),
+                          child: const Image(
+                            image: AssetImage("image/Profile_Default.png"),
+                            width: double.infinity,
+                            height: 100,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                item['title'],
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                item['category'],
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: IconButton(
+                            icon: Icon(
+                              item['isFavorite'] ? Icons.favorite : Icons.favorite_border,
+                              color: item['isFavorite'] ? Colors.red : Colors.grey,
+                            ),
+                            onPressed: () => _toggleFavorite(item['id']),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
