@@ -3,7 +3,9 @@ import '../screens/homepage.dart';
 import '../main.dart';
 
 class DetailProduct extends StatefulWidget {
-  const DetailProduct({super.key});
+   final Map<String, dynamic> product;
+
+  const DetailProduct({super.key, required this.product});
 
   @override
   State<DetailProduct> createState() => _DetailProductState();

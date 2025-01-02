@@ -17,7 +17,7 @@ class _ListCategoryState extends State<ListCategory> {
     return InkWell(
       onTap: () => Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const DetailProduct()),
+        MaterialPageRoute(builder: (context) => const DetailProduct(product: {},)),
       ),
       child: Padding(
         padding: const EdgeInsets.all(5),
