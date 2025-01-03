@@ -54,115 +54,115 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 90),
-                child: GridView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: favoriteProducts.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 2,
-                    crossAxisSpacing: 10,
-                    childAspectRatio: 0.95,
-                  ),
-                  itemBuilder: (context, index) {
-                    final product = favoriteProducts[index];
-                    return InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DetailProduct(product: product),
-                          ),
-                        );
-                      },
-                      child: Stack(
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.2),
-                                  blurRadius: 5,
-                                  offset: const Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Image.network(
-                                    product["image"],
-                                    width: double.infinity,
-                                    height: 150,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(5),
-                                  child: Row(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(left: 5, top: 5),
-                                        child: Container(
-                                          width: 5,
-                                          height: 50,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(10),
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(left: 10, top: 5),
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              product["name"],
-                                              style: const TextStyle(
-                                                fontFamily: 'Rewals',
-                                                fontSize: 16,
-                                              ),
-                                            ),
-                                            const Text(
-                                              "Category",
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.w700,
-                                                fontSize: 15,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Positioned(
-                            bottom: 10,
-                            right: 10,
-                            child: IconButton(
-                              icon: Icon(
-                                product["isFavorite"] ? Icons.favorite : Icons.favorite_border,
-                                color: product["isFavorite"] ? Colors.red : Colors.grey,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  product["isFavorite"] = !product["isFavorite"];
-                                });
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
+                // child: GridView.builder(
+                //   scrollDirection: Axis.vertical,
+                //   itemCount: favoriteProducts.length,
+                //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                //     crossAxisCount: 2,
+                //     mainAxisSpacing: 2,
+                //     crossAxisSpacing: 10,
+                //     childAspectRatio: 0.95,
+                //   ),
+                //   itemBuilder: (context, index) {
+                //     final product = favoriteProducts[index];
+                //     return InkWell(
+                //       onTap: () {
+                //         Navigator.push(
+                //           context,
+                //           MaterialPageRoute(
+                //             builder: (context) => DetailProduct(product: product),
+                //           ),
+                //         );
+                //       },
+                //       child: Stack(
+                //         children: [
+                //           Container(
+                //             margin: const EdgeInsets.all(10),
+                //             decoration: BoxDecoration(
+                //               borderRadius: BorderRadius.circular(10),
+                //               color: Colors.white,
+                //               boxShadow: [
+                //                 BoxShadow(
+                //                   color: Colors.black.withOpacity(0.2),
+                //                   blurRadius: 5,
+                //                   offset: const Offset(0, 2),
+                //                 ),
+                //               ],
+                //             ),
+                //             child: Column(
+                //               children: [
+                //                 ClipRRect(
+                //                   borderRadius: BorderRadius.circular(10),
+                //                   child: Image.network(
+                //                     product["image"],
+                //                     width: double.infinity,
+                //                     height: 150,
+                //                     fit: BoxFit.cover,
+                //                   ),
+                //                 ),
+                //                 Padding(
+                //                   padding: const EdgeInsets.all(5),
+                //                   child: Row(
+                //                     children: [
+                //                       Padding(
+                //                         padding: const EdgeInsets.only(left: 5, top: 5),
+                //                         child: Container(
+                //                           width: 5,
+                //                           height: 50,
+                //                           decoration: BoxDecoration(
+                //                             borderRadius: BorderRadius.circular(10),
+                //                             color: Colors.black,
+                //                           ),
+                //                         ),
+                //                       ),
+                //                       Padding(
+                //                         padding: const EdgeInsets.only(left: 10, top: 5),
+                //                         child: Column(
+                //                           crossAxisAlignment: CrossAxisAlignment.start,
+                //                           children: [
+                //                             Text(
+                //                               product["name"],
+                //                               style: const TextStyle(
+                //                                 fontFamily: 'Rewals',
+                //                                 fontSize: 16,
+                //                               ),
+                //                             ),
+                //                             const Text(
+                //                               "Category",
+                //                               style: TextStyle(
+                //                                 fontWeight: FontWeight.w700,
+                //                                 fontSize: 15,
+                //                               ),
+                //                             ),
+                //                           ],
+                //                         ),
+                //                       ),
+                //                     ],
+                //                   ),
+                //                 ),
+                //               ],
+                //             ),
+                //           ),
+                //           Positioned(
+                //             bottom: 10,
+                //             right: 10,
+                //             child: IconButton(
+                //               icon: Icon(
+                //                 product["isFavorite"] ? Icons.favorite : Icons.favorite_border,
+                //                 color: product["isFavorite"] ? Colors.red : Colors.grey,
+                //               ),
+                //               onPressed: () {
+                //                 setState(() {
+                //                   product["isFavorite"] = !product["isFavorite"];
+                //                 });
+                //               },
+                //             ),
+                //           ),
+                //         ],
+                //       ),
+                //     );
+                //   },
+                // ),
               ),
             ),
           ],
