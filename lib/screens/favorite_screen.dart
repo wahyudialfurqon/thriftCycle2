@@ -66,14 +66,14 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                   itemBuilder: (context, index) {
                     final product = favoriteProducts[index];
                     return InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DetailProduct(product: product),
-                          ),
-                        );
-                      },
+                      // onTap: () {
+                      //   Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //       builder: (context) => DetailProduct(product: product),
+                      //     ),
+                      //   );
+                      // },
                       child: Stack(
                         children: [
                           Container(

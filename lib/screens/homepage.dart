@@ -1,9 +1,12 @@
+
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:thriftcycle/screens/detail_product.dart';
 import '../wigedts/listcategory.dart';
+import '../wigedts/cardproduct.dart';
 import '../service/category.dart';
+import '../service/model/product.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,6 +16,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   String currentUsername = 'user1234';
   File? profileImage;
   String productName = "Jersey Manchester United";
@@ -205,7 +209,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-            // TODO: List Category
+                  // TODO: List Category
                   SizedBox(
                     height: 70,
                     child: ListView.builder(
@@ -214,7 +218,8 @@ class _HomePageState extends State<HomePage> {
                       itemCount: categories.length,
                       itemBuilder: (context, index) {
                         final category = categories[index];
-                        return ListCategory( category: category);;
+                        return ListCategory(category: category);
+                        //TODO : List Category
                       },
                     ),
                   ),
@@ -240,98 +245,47 @@ class _HomePageState extends State<HomePage> {
                       thickness: 1,
                     ),
                   ),
-            //TODO : List Product
-                  SizedBox(
-                    height: 400,
-                    child: GridView.builder(
-                        scrollDirection: Axis.vertical,
-                        itemCount: 10,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 2,
-                          crossAxisSpacing: 0,
-                          childAspectRatio: 0.95,
-                        ),
-                        itemBuilder: (context, index) => InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const DetailProduct(product: {},)));
+                  //TODO : List Product
+                  FutureBuilder<List<Product>>(
+                    future: Product.fetchProducts(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(
+                            child:
+                                CircularProgressIndicator()); // Menunggu data dimuat
+                      } else if (snapshot.hasError) {
+                        return Center(
+                            child: Text("Harapkan periksa koneksi internet"));
+
+                        /// Menampilkan error jika ada
+                      } else if (snapshot.hasData) {
+                        return SizedBox(
+                          height: 400,
+                          child: GridView.builder(
+                            scrollDirection: Axis.vertical,
+                            itemCount: snapshot.data!.length,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              mainAxisSpacing: 2,
+                              crossAxisSpacing: 0,
+                              childAspectRatio: 0.95,
+                            ),
+                            itemBuilder: (context, index) {
+                              final product = snapshot.data![
+                                  index]; // Mengambil data produk dari snapshot
+                              return CardProduct(
+                                  product:
+                                      product); // Mengoper data ke widget CardProduct
                             },
-                            child: Container(
-                                margin: const EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.2),
-                                      blurRadius: 5,
-                                      offset: const Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                child: Column(children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
-                                    child: const Image(
-                                      image: NetworkImage(
-                                          "https://s4.bukalapak.com/img/9766095992/w-1000/LOKAL_Jersey_Baju_MU_Manchester_United_Home_Merah_2018_2019_.jpg"),
-                                      width: 300,
-                                      height: 100,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                  Padding(
-                                      padding: const EdgeInsets.all(5),
-                                      child: Row(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 5, top: 5),
-                                            child: Container(
-                                                width: 5,
-                                                height: 50,
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  color: Colors.black,
-                                                )),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 10, top: 5),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  productName.length > 9
-                                                      ? productName.substring(
-                                                              0, 10) +
-                                                          "..."
-                                                      : productName,
-                                                  style: const TextStyle(
-                                                    fontFamily: 'Rewals',
-                                                    fontSize: 20,
-                                                  ),
-                                                ),
-                                                const Text(
-                                                  "Coash",
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.w700,
-                                                    fontSize: 15,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ))
-                                ])))),
+                          ),
+                        );
+                      } else {
+                        return const Center(
+                            child: Text(
+                                "No data available")); // Jika tidak ada data
+                      }
+                    },
                   ),
                 ],
               ),
