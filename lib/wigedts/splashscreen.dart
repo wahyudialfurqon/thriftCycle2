@@ -38,8 +38,8 @@ class _SplashscreenState extends State<Splashscreen> {
     });
     Future.delayed(const Duration(milliseconds: 7000), () {
       setState(() {
-        _heightContainer = 1000.0;
-        _weidthContainer = 1000.0;
+        _heightContainer = 10000.0;
+        _weidthContainer = 10000.0;
         _opacity = 1;
       });
     });
