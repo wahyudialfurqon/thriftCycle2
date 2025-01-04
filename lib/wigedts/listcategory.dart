@@ -15,10 +15,10 @@ class _ListCategoryState extends State<ListCategory> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const DetailProduct()),
-      ),
+      // onTap: () => Navigator.push(
+      //   context,
+      //   MaterialPageRoute(builder: (context) => const DetailProduct(product:product.id, )),
+      // ),
       child: Padding(
         padding: const EdgeInsets.all(5),
         child: Container(

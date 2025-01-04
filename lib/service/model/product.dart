@@ -48,21 +48,30 @@ class Product {
     };
   }
 
-
   static Future<List<Product>> fetchProducts() async {
-   //gunakan url dari server misal menggunak android studio emulator gunakan ip 10.0.2.2
-   //conto: "http://10.0.2.2:8000/storage/${widget.product.imageUri}"
-   //jika menggunakan device fisik gunakan ip sesuai dengan ip yang digunakan
-   //contoh: "http://127.0.0.1:8000/storage/${widget.product.imageUri}"
-  const url = 'http://10.0.2.2:8000/api/items';
+    //gunakan url dari server misal menggunak android studio emulator gunakan ip 10.0.2.2
+    //conto: "http://10.0.2.2:8000/storage/${widget.product.imageUri}"
+    //jika menggunakan device fisik gunakan ip sesuai dengan ip yang digunakan
+    //contoh: "http://127.0.0.1:8000/storage/${widget.product.imageUri}"
+    const url = 'http://10.0.2.2:8000/api/items';
     final response = await http.get(Uri.parse(url));
-    final  Map <String, dynamic> data = json.decode(response.body);
-    if(data['success'] == true){ {
+    final Map<String, dynamic> data = json.decode(response.body);
+    if (data['success'] == true) {
       final List<dynamic> productsJson = data['data'];
       return productsJson.map((json) => Product.fromJson(json)).toList();
-    }
     } else {
       throw Exception('Failed to load products');
     }
   }
+
+  static Future<Product> getProduct(int productId) async {
+  final url = 'http://10.0.2.2:8000/api/items/$productId';
+  final response = await http.get(Uri.parse(url));
+  final data = json.decode(response.body);
+  if (data['success'] == true) {
+    return Product.fromJson(data['data']); // Konversi Map ke Product
+  } else {
+    throw Exception('Failed to fetch product');
+  }
+}
 }

@@ -96,7 +96,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                   child: Image.network(
                                     product["image"],
                                     width: double.infinity,
-                                    height: 150,
+                                    height: 80,
                                     fit: BoxFit.cover,
                                   ),
                                 ),
