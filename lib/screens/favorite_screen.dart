@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:thriftcycle/screens/detail_product.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:thriftcycle/service/model/product.dart';
+import 'package:thriftcycle/wigedts/cardproduct.dart';
 
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({super.key});
@@ -9,16 +11,46 @@ class FavoriteScreen extends StatefulWidget {
 }
 
 class _FavoriteScreenState extends State<FavoriteScreen> {
-  final List<Map<String, dynamic>> favoriteProducts = List.generate(
-    10,
-    (index) => {
-      "name": "Product ${index + 1}",
-      "image":
-          "https://s4.bukalapak.com/img/9766095992/w-1000/LOKAL_Jersey_Baju_MU_Manchester_United_Home_Merah_2018_2019_.jpg",
-      "price": "\$${(index + 1) * 10}",
-      "isFavorite": true,
-    },
-  );
+  late List<Product> favoriteProducts = [];
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _loadFavorites();
+  }
+
+  Future<void> _loadFavorites() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<Product> allProducts = await Product.fetchProducts();
+    List<Product> tempFavorites = [];
+    for (var product in allProducts) {
+      String key = 'favorite_${product.id}';
+      bool isFavorite = prefs.getBool(key) ?? false;
+      if (isFavorite) {
+        product.isFavorite = true;
+        tempFavorites.add(product);
+      }
+    }
+    setState(() {
+      favoriteProducts = tempFavorites;
+    });
+  }
+
+  Future<void> _toggleFavorite(Product product) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String key = 'favorite_${product.id}';
+    setState(() {
+      product.isFavorite = !product.isFavorite;
+
+      if (product.isFavorite) {
+        favoriteProducts.add(product);
+      } else {
+        favoriteProducts.remove(product);
+      }
+
+      prefs.setBool(key, product.isFavorite);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +71,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                       "Favorite",
                       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
                     ),
-                    SizedBox(height: 4), // Untuk menyesuaikan posisi vertikal
+                    SizedBox(height: 4), 
                     Text(
                       "your favorite Here",
                       style: TextStyle(fontSize: 13),
@@ -48,120 +80,86 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 20),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.only(bottom: 90),
-                child: GridView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: favoriteProducts.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 2,
-                    crossAxisSpacing: 10,
-                    childAspectRatio: 0.95,
-                  ),
-                  itemBuilder: (context, index) {
-                    final product = favoriteProducts[index];
-                    return InkWell(
-                      // onTap: () {
-                      //   Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //       builder: (context) => DetailProduct(product: product),
-                      //     ),
-                      //   );
-                      // },
-                      child: Stack(
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.2),
-                                  blurRadius: 5,
-                                  offset: const Offset(0, 2),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  children: [
+                    const Align(
+                      alignment: Alignment.centerLeft,
+                    ),
+                    const SizedBox(height: 20),
+                    //TODO : List Product
+                    FutureBuilder<List<Product>>(
+                      future: Product.fetchProducts(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.waiting) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          ); // Menunggu data dimuat
+                        } else if (snapshot.hasError) {
+                          return Center(
+                            child: Text("Harapkan periksa koneksi internet"),
+                          );
+                        } else if (snapshot.hasData) {
+                          // Jika ada data
+                          if (favoriteProducts.isEmpty) {
+                            return const Center(
+                              child: Padding(
+                                 padding: const EdgeInsets.only(top: 200),
+                                child: Text(
+                                  "No Favorite Here", 
+                                  style: TextStyle(fontSize: 18),
                                 ),
-                              ],
-                            ),
-                            child: Column(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Image.network(
-                                    product["image"],
-                                    width: double.infinity,
-                                    height: 80,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(5),
-                                  child: Row(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(left: 5, top: 5),
-                                        child: Container(
-                                          width: 5,
-                                          height: 50,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(10),
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(left: 10, top: 5),
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              product["name"],
-                                              style: const TextStyle(
-                                                fontFamily: 'Rewals',
-                                                fontSize: 16,
-                                              ),
-                                            ),
-                                            const Text(
-                                              "Category",
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.w700,
-                                                fontSize: 15,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Positioned(
-                            bottom: 10,
-                            right: 10,
-                            child: IconButton(
-                              icon: Icon(
-                                product["isFavorite"] ? Icons.favorite : Icons.favorite_border,
-                                color: product["isFavorite"] ? Colors.red : Colors.grey,
                               ),
-                              onPressed: () {
-                                setState(() {
-                                  product["isFavorite"] = !product["isFavorite"];
-                                });
+                            );
+                          }
+                          return SizedBox(
+                            height: 300,
+                            child: GridView.builder(
+                              scrollDirection: Axis.vertical,
+                              itemCount: favoriteProducts.length,
+                              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                mainAxisSpacing: 2,
+                                crossAxisSpacing: 0,
+                                childAspectRatio: 0.95,
+                              ),
+                              itemBuilder: (context, index) {
+                                final product = favoriteProducts[index];
+                                return Stack(
+                                  clipBehavior: Clip.none, 
+                                  children: [
+                                    CardProduct(product: product),
+                                    Positioned(
+                                      bottom: 10,
+                                      right: 10,
+                                      child: IconButton(
+                                        icon: Icon(
+                                          product.isFavorite
+                                              ? Icons.favorite
+                                              : Icons.favorite_border,
+                                          color: product.isFavorite
+                                              ? Colors.red 
+                                              : Colors.grey, 
+                                        ),
+                                        onPressed: () => _toggleFavorite(product),
+                                      ),
+                                    ),
+                                  ],
+                                );
                               },
                             ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
+                          );
+                        } else {
+                          return const Center(
+                            child: Text("No data available"),
+                          ); 
+                        }
+                      },
+                    ),
+                  ],
                 ),
               ),
             ),
