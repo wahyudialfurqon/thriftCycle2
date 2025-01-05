@@ -32,8 +32,9 @@ class _SearchScreenState extends State<SearchScreen> {
     fetchData();
   }
 
+  /// ✅ Fetch data from API
   Future<void> fetchData() async {
-    final url = Uri.parse('http://127.0.0.1:8000/api/items');
+    final url = Uri.parse('http://10.0.2.2:8000/api/items'); // Replace localhost with 10.0.2.2 for Android Emulator
     try {
       final response = await http.get(url);
       if (response.statusCode == 200) {
@@ -49,6 +50,7 @@ class _SearchScreenState extends State<SearchScreen> {
     }
   }
 
+  /// ✅ Update search results based on item name
   void updateSearchResults(String query) {
     setState(() {
       searchQuery = query;
@@ -57,7 +59,7 @@ class _SearchScreenState extends State<SearchScreen> {
       } else {
         searchResults = items
             .where((item) =>
-                item['name'].toLowerCase().contains(query.toLowerCase()))
+                item['item_name'].toLowerCase().contains(query.toLowerCase()))
             .toList();
       }
     });
@@ -66,21 +68,21 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey[100],
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 40.0),
         child: Column(
           children: [
-            // Search Bar
+            // ✅ Search Bar
             Container(
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(30),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 4,
-                    offset: Offset(0, 2),
+                    color: Colors.black12,
+                    blurRadius: 6,
+                    offset: Offset(0, 3),
                   ),
                 ],
               ),
@@ -89,8 +91,9 @@ class _SearchScreenState extends State<SearchScreen> {
                   Expanded(
                     child: TextField(
                       onChanged: updateSearchResults,
+                      style: TextStyle(fontSize: 16),
                       decoration: InputDecoration(
-                        hintText: "Tap to typing...",
+                        hintText: "Search for items...",
                         hintStyle: TextStyle(color: Colors.grey),
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.symmetric(
@@ -102,7 +105,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                   Container(
                     decoration: BoxDecoration(
-                      color: Color(0xFF2C7C7D),
+                      color: Colors.teal,
                       borderRadius: BorderRadius.only(
                         topRight: Radius.circular(30),
                         bottomRight: Radius.circular(30),
@@ -122,7 +125,11 @@ class _SearchScreenState extends State<SearchScreen> {
                 child: Center(
                   child: Text(
                     "What do you want to look for?",
-                    style: TextStyle(color: Colors.grey, fontSize: 16),
+                    style: TextStyle(
+                      color: Colors.grey[600],
+                      fontSize: 18,
+                      fontStyle: FontStyle.italic,
+                    ),
                   ),
                 ),
               ),
@@ -132,39 +139,76 @@ class _SearchScreenState extends State<SearchScreen> {
                     ? GridView.builder(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
-                          childAspectRatio: 0.75,
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 10,
+                          childAspectRatio: 0.8,
+                          crossAxisSpacing: 12,
+                          mainAxisSpacing: 12,
                         ),
                         itemCount: searchResults.length,
                         itemBuilder: (context, index) {
                           final item = searchResults[index];
-                          return Card(
-                            elevation: 2,
+                          return Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(12),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black12,
+                                  blurRadius: 6,
+                                  offset: Offset(0, 2),
+                                ),
+                              ],
+                            ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Expanded(
-                                  child: item['image_path'] != null && item['image_path'].isNotEmpty
-                                      ? Image.network(
-                                          item['image_path'],
-                                          fit: BoxFit.cover,
-                                          errorBuilder: (context, error, stackTrace) =>
-                                              Icon(Icons.broken_image, size: 50, color: Colors.grey),
-                                        )
-                                      : Icon(Icons.image_not_supported, size: 50, color: Colors.grey),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(12),
+                                    ),
+                                    child: item['image_path'] != null &&
+                                            item['image_path'].isNotEmpty
+                                        ? Image.network(
+                                            'http://10.0.2.2:8000/${item['image_path']}',
+                                            fit: BoxFit.cover,
+                                            width: double.infinity,
+                                            errorBuilder: (context, error,
+                                                    stackTrace) =>
+                                                Icon(Icons.broken_image,
+                                                    size: 50,
+                                                    color: Colors.grey),
+                                          )
+                                        : Icon(Icons.image_not_supported,
+                                            size: 50, color: Colors.grey),
+                                  ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
-                                    item['name'],
-                                    style: TextStyle(fontWeight: FontWeight.bold),
+                                    item['item_name'],
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                                  child: Text(item['category'] ?? "Unknown Category"),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0),
+                                  child: Text(
+                                    item['item_description'] ??
+                                        "No description available",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.grey[600],
+                                    ),
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
                                 ),
+                                SizedBox(height: 8),
                               ],
                             ),
                           );
@@ -173,7 +217,10 @@ class _SearchScreenState extends State<SearchScreen> {
                     : Center(
                         child: Text(
                           "No results found",
-                          style: TextStyle(color: Colors.red, fontSize: 16),
+                          style: TextStyle(
+                              color: Colors.red[700],
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600),
                         ),
                       ),
               ),
