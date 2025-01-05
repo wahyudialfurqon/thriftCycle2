@@ -31,21 +31,28 @@ class _DetailviewState extends State<Detailview> {
           ],
         ),
         Row(
-          children: [
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children:[
             SizedBox(
-              height: 80,
-              width: 370,
+              height: MediaQuery.of(context).size.height * 0.1,
+              width: MediaQuery.of(context).size.width * 0.5,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text(
-                    widget.product.item,
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width , 
+                    child: Text(
+                      widget.product.item,
+                      style: const TextStyle(
+                        fontSize: 23,
+                        fontWeight: FontWeight.bold,
+                        //overflow: TextOverflow.ellipsis
+                      ),
+                        maxLines: 2,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 4,
                     width: 190,
                     child: Divider(
@@ -54,11 +61,11 @@ class _DetailviewState extends State<Detailview> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 5),
+                    padding:const EdgeInsets.only(top: 5,),
                     child: Text(
                       widget.product.category,
-                      style: TextStyle(
-                        fontSize: 15,
+                      style: const TextStyle(
+                        fontSize: 19,
                         color: Colors.grey,
                       ),
                     ),
@@ -69,19 +76,18 @@ class _DetailviewState extends State<Detailview> {
           ],
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 1),
+          padding: const EdgeInsets.only(top: 0),
           child: Stack(
             clipBehavior: Clip.none,
             children: [
               Container(
-                height: 250,
-                width: MediaQuery.of(context).size.width * 0.5,
+                height: MediaQuery.of(context).size.height * 0.4,
+                width: MediaQuery.of(context).size.width * 1,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
-                        color: const Color.fromARGB(255, 137, 136, 136)
-                            .withOpacity(0.5),
+                        color: const Color.fromARGB(255, 137, 136, 136).withOpacity(0.5),
                         blurRadius: 3,
                         offset: const Offset(5, 5),
                       )
@@ -146,7 +152,7 @@ class _DetailviewState extends State<Detailview> {
                   children: [
                     //TODO Nama Donasi
                     Padding(
-                      padding: EdgeInsets.only(bottom: 2),
+                      padding: const EdgeInsets.only(bottom: 2),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -166,8 +172,8 @@ class _DetailviewState extends State<Detailview> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                        const  Text("No Telepon "),
-                        const SizedBox(width: 32),
+                          const Text("No Telepon "),
+                          const SizedBox(width: 32),
                           Text(widget.product.phoneNumber),
                         ],
                       ),

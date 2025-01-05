@@ -23,27 +23,27 @@ class _SplashscreenState extends State<Splashscreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds: 4500), () {
+    Future.delayed(const Duration(milliseconds: 2000), () {
       setState(() {
         _x1 = 1090.0;
         _x2 = -500.0;
       });
     });
-    Future.delayed(const Duration(milliseconds: 5000), () {
+    Future.delayed(const Duration(milliseconds:3000), () {
       setState(() {
         _heightLogo = 300.0;
         _widthLogo = 300.0;
         _dgLogo = 0;
       });
     });
-    Future.delayed(const Duration(milliseconds: 7000), () {
+    Future.delayed(const Duration(milliseconds: 4500), () {
       setState(() {
-        _heightContainer = 10000.0;
-        _weidthContainer = 10000.0;
+        _heightContainer = 4000.0;
+        _weidthContainer = 4000.0;
         _opacity = 1;
       });
     });
-    Timer(const Duration(milliseconds: 8000), () {
+    Timer(const Duration(milliseconds: 6000), () {
       setState(() {
             Navigator.push(
         context,
@@ -86,12 +86,12 @@ class _SplashscreenState extends State<Splashscreen> {
                           ],
                         ),
                         AnimatedPositioned(
-                            duration: const Duration(milliseconds: 5000),
+                            duration: const Duration(milliseconds: 9000),
                             curve: Curves.easeOut,
-                            width: MediaQuery.of(context).size.width * 2,
-                            height: MediaQuery.of(context).size.height * 2,
-                            top: -353,
-                            left: -207,
+                            width: MediaQuery.of(context).size.width * 3,
+                            height: MediaQuery.of(context).size.height * 3,
+                            top: MediaQuery.of(context).size.height * -1,
+                            left: MediaQuery.of(context).size.width * -1,
                             child: AnimatedOpacity(
                               opacity: _opacity,
                               duration: const Duration(milliseconds: 4000),
@@ -99,7 +99,7 @@ class _SplashscreenState extends State<Splashscreen> {
                                 child: AnimatedContainer(
                                   height: _heightContainer,
                                   width: _weidthContainer,
-                                  duration: const Duration(milliseconds: 1000),
+                                  duration: const Duration(milliseconds: 5000),
                                   decoration: const BoxDecoration(
                                       color: Color(0xFF2C7C7D),
                                       shape: BoxShape.circle),

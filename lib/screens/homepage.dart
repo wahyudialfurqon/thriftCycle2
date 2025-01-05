@@ -2,7 +2,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:thriftcycle/screens/detail_product.dart';
 import '../wigedts/listcategory.dart';
 import '../wigedts/cardproduct.dart';
 import '../service/category.dart';
@@ -54,7 +53,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 20),
+              padding: const EdgeInsets.only(top: 35),
               child: Center(
                 child: Container(
                   decoration: BoxDecoration(
