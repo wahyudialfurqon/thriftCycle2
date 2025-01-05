@@ -19,7 +19,10 @@ class _CardProductState extends State<CardProduct> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => DetailProduct(idProduct: widget.product.id,),
+            builder: (context) => DetailProduct(
+              idProduct: widget.product.id,
+              product: widget.product,
+            ),
           ),
         );
       },
