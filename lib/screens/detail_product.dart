@@ -21,16 +21,7 @@ class _DetailProductState extends State<DetailProduct> {
             future: Product.getProduct(widget.idProduct),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: 1000,
-                    ),
-                    Center(child: CircularProgressIndicator())
-                  ],
-                );
+                return const Center(child: CircularProgressIndicator());
               } else if (snapshot.hasError) {
                 return Center(
                     child: Text('Terjadi kesalahan: ${snapshot.error}'));
