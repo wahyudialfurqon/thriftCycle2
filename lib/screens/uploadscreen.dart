@@ -25,7 +25,7 @@ class _UploadScreenState extends State<UploadScreen> {
     "electronic",
     "stationary",
     "toys",
-    "sports style"
+    "sports style",
     "furniture",
   ];
 
@@ -189,7 +189,9 @@ class _UploadScreenState extends State<UploadScreen> {
                               items: _items.map((String item) {
                                 return DropdownMenuItem<String>(
                                   value: item,
-                                  child: Text(item),
+                                  child: Text(item
+                                      )
+                                  ,
                                 );
                               }).toList(),
                             )),
