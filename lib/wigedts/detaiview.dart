@@ -97,7 +97,7 @@ class _DetailviewState extends State<Detailview> {
                   child: Image(
                     fit: BoxFit.cover,
                     image: NetworkImage(
-                        "http://192.168.200.231:8000/storage/${widget.product.imageUri}"),
+                        "http://192.168.1.6:8000/storage/${widget.product.imageUri}"),
                   ),
                 ),
               ),
