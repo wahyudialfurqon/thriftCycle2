@@ -23,11 +23,6 @@ class _SplashscreenState extends State<Splashscreen> {
   @override
   void initState() {
     super.initState();
-    final witdhscreen = MediaQuery.of(context).size.width;
-    setState(() {
-      _widthLogo = witdhscreen > 411 ? 300.0 : 200.0;
-    });
-   
     Future.delayed(const Duration(milliseconds: 2000), () {
 
         setState(() {
