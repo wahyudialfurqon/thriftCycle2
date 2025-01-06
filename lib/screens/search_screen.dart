@@ -34,7 +34,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   /// ✅ Fetch data from API
   Future<void> fetchData() async {
-    final url = Uri.parse('http://10.0.2.2:8000/api/items'); // Replace localhost with 10.0.2.2 for Android Emulator
+    final url = Uri.parse('http://192.168.45.189:8000/api/items'); // Replace localhost with 10.0.2.2 for Android Emulator
     try {
       final response = await http.get(url);
       if (response.statusCode == 200) {
@@ -169,7 +169,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                     child: item['image_path'] != null &&
                                             item['image_path'].isNotEmpty
                                         ? Image.network(
-                                            'http://10.0.2.2:8000/${item['image_path']}',
+                                            'http://192.168.45.189/storage/${item['image_path']}',
                                             fit: BoxFit.cover,
                                             width: double.infinity,
                                             errorBuilder: (context, error,
