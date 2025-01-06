@@ -19,7 +19,10 @@ class _CardProductState extends State<CardProduct> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => DetailProduct(idProduct: widget.product.id,),
+            builder: (context) => DetailProduct(
+              idProduct: widget.product.id,
+              product: widget.product,
+            ),
           ),
         );
       },
@@ -41,7 +44,7 @@ class _CardProductState extends State<CardProduct> {
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Image.network(
-                "http://192.168.1.6:8000/storage/${widget.product.imageUri}",
+                "http://192.168.45.189:8000/storage/${widget.product.imageUri}",
                 width: 300,
                 height: 100,
                 fit: BoxFit.cover,

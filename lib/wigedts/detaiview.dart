@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:thriftcycle/main.dart';
 import '../service/model/product.dart';
 
@@ -12,6 +13,29 @@ class Detailview extends StatefulWidget {
 
 class _DetailviewState extends State<Detailview> {
   bool isFavorite = false;
+   @override
+  void initState() {
+    super.initState();
+    _loadFavoriteStatus();
+  }
+
+   Future<void> _loadFavoriteStatus() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String key = 'favorite_${widget.product.id}'; // Gunakan ID produk
+    setState(() {
+      isFavorite = prefs.getBool(key) ?? false;
+    });
+  }
+
+   Future<void> _toggleFavorite() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String key = 'favorite_${widget.product.id}'; // Gunakan ID produk
+    setState(() {
+      isFavorite = !isFavorite;
+    });
+    await prefs.setBool(key, isFavorite);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -97,7 +121,7 @@ class _DetailviewState extends State<Detailview> {
                   child: Image(
                     fit: BoxFit.cover,
                     image: NetworkImage(
-                        "http://192.168.1.6:8000/storage/${widget.product.imageUri}"),
+                        "http://192.168.45.189:8000/storage/${widget.product.imageUri}"),
                   ),
                 ),
               ),
@@ -120,11 +144,8 @@ class _DetailviewState extends State<Detailview> {
                         color: isFavorite ? Colors.red : Colors.grey,
                         size: 24,
                       ),
-                      onPressed: () {
-                        setState(() {
-                          isFavorite = !isFavorite;
-                        });
-                      }),
+                      onPressed: _toggleFavorite,
+                  ),
                 ),
               ),
             ],
