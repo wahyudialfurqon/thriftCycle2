@@ -10,7 +10,6 @@ class Splashscreen extends StatefulWidget {
 }
 
 class _SplashscreenState extends State<Splashscreen> {
-  double _drd = 0;
   double _x1 = 0;
   double _x2 = 0;
   double _heightLogo = 0;
@@ -24,17 +23,12 @@ class _SplashscreenState extends State<Splashscreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(milliseconds: 2000), () {
-
-        setState(() {
           // Perhitungan berdasarkan lebar layar
-          _drd = MediaQuery.of(context).size.width > 411 ? 1400 : 2000;
           _x1 = 1090.0;
           _x2 = -1000.0;
         });
-      
-    });
 
-    Future.delayed(const Duration(milliseconds: 3000), () {
+    Future.delayed(const Duration(milliseconds: 4000), () {
       setState(() {
         _heightLogo = 300.0;
         _widthLogo = 300.0;
@@ -126,7 +120,7 @@ class _SplashscreenState extends State<Splashscreen> {
                             color: const Color(0xFF2C7C7D),
                             transform: Matrix4.identity()
                               ..rotateZ(MediaQuery.of(context).size.height /
-                                  _drd) // Rotasi (dalam radian) untuk memiringkan container
+                                  2000) // Rotasi (dalam radian) untuk memiringkan container
                               ..translate(
                                   _x1,
                                   MediaQuery.of(context).size.height *
@@ -139,7 +133,7 @@ class _SplashscreenState extends State<Splashscreen> {
                           curve: Curves.ease,
                           top:
                               MediaQuery.of(context).size.height * -0.78, //-700
-                          left: MediaQuery.of(context).size.width * -0.5, //-530
+                          left: MediaQuery.of(context).size.width * -0.42, //-530
                           child: AnimatedContainer(
                             duration: const Duration(milliseconds: 5000),
                             curve: Curves.ease,
@@ -148,7 +142,7 @@ class _SplashscreenState extends State<Splashscreen> {
                             color: const Color(0xFF1B6061),
                             transform: Matrix4.identity()
                               ..rotateZ(MediaQuery.of(context).size.height /
-                                  _drd) // 1400 2000 Rotasi (dalam radian55) untuk memiringkan container
+                                  2000) // 1400 2000 Rotasi (dalam radian55) untuk memiringkan container
                               ..translate(
                                   _x2,
                                   MediaQuery.of(context).size.height *

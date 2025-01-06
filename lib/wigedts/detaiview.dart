@@ -66,31 +66,30 @@ class _DetailviewState extends State<Detailview> {
                 children: [
                   SizedBox(
                     width: MediaQuery.of(context).size.width , 
-                    child: Text(
-                      widget.product.item,
-                      style: const TextStyle(
-                        fontSize: 23,
-                        fontWeight: FontWeight.bold,
-                        //overflow: TextOverflow.ellipsis
+                    child: Container(
+                      alignment: Alignment.centerRight, 
+                      child: Text(
+                        widget.product.item,
+                        style: const TextStyle(
+                          fontSize: 23,
+                          fontWeight: FontWeight.bold,
+                          //overflow: TextOverflow.ellipsis
+                        ),
+                          maxLines: 2,
                       ),
-                        maxLines: 2,
                     ),
                   ),
                   const SizedBox(
                     height: 4,
                     width: 190,
-                    child: Divider(
-                      thickness: 2,
-                      color: Colors.black,
-                    ),
                   ),
                   Padding(
-                    padding:const EdgeInsets.only(top: 5,),
+                    padding:const EdgeInsets.only(top: 2,),
                     child: Text(
                       widget.product.category,
-                      style: const TextStyle(
+                      style:  TextStyle(
                         fontSize: 19,
-                        color: Colors.grey,
+                        color: Colors.grey[600],
                       ),
                     ),
                   )
@@ -121,7 +120,7 @@ class _DetailviewState extends State<Detailview> {
                   child: Image(
                     fit: BoxFit.cover,
                     image: NetworkImage(
-                        "http://192.168.45.189:8000/storage/${widget.product.imageUri}"),
+                        "http://192.168.200.231:8000/storage/${widget.product.imageUri}"),
                   ),
                 ),
               ),
@@ -155,12 +154,12 @@ class _DetailviewState extends State<Detailview> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Padding(
-              padding: EdgeInsets.only(top: 30, left: 15),
+              padding: EdgeInsets.only(top: 15, left: 10, bottom: 3),
               child: Text(
-                "Detail Produk",
+                "Detail Product",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 20,
+                  fontSize: 25,
                 ),
               ),
             ),

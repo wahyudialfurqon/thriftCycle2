@@ -124,7 +124,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                 crossAxisCount: 2,
                                 mainAxisSpacing: 2,
                                 crossAxisSpacing: 0,
-                                childAspectRatio: 0.95,
+                                childAspectRatio: 0.80,
                               ),
                               itemBuilder: (context, index) {
                                 final product = favoriteProducts[index];

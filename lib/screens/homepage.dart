@@ -1,7 +1,7 @@
-
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:thriftcycle/screens/search_screen.dart';
 import '../wigedts/listcategory.dart';
 import '../wigedts/cardproduct.dart';
 import '../service/category.dart';
@@ -15,19 +15,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   String currentUsername = 'user1234';
   File? profileImage;
   String productName = "Jersey Manchester United";
 
-    @override
+  @override
   void initState() {
     super.initState();
     _loadProfileData();
     _saveProfileData();
   }
 
-    Future<void> _loadProfileData() async {
+  Future<void> _loadProfileData() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
       currentUsername = prefs.getString('username') ?? 'user1234';
@@ -38,7 +37,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-    Future<void> _saveProfileData() async {
+  Future<void> _saveProfileData() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('username', currentUsername);
     if (profileImage != null) {
@@ -83,7 +82,9 @@ class _HomePageState extends State<HomePage> {
                             showDialog(
                               context: context,
                               barrierDismissible: true,
-                              barrierColor: const Color.fromARGB(255, 255, 255, 255).withOpacity(0.9),
+                              barrierColor:
+                                  const Color.fromARGB(255, 255, 255, 255)
+                                      .withOpacity(0.9),
                               builder: (BuildContext context) {
                                 return Dialog(
                                   backgroundColor: Colors.transparent,
@@ -95,13 +96,17 @@ class _HomePageState extends State<HomePage> {
                                     width: 300,
                                     child: Center(
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
                                         children: [
                                           CircleAvatar(
                                             radius: 70,
-                                            backgroundImage: profileImage == null
-                                                ? const AssetImage("image/Profile_Default.png")
+                                            backgroundImage: profileImage ==
+                                                    null
+                                                ? const AssetImage(
+                                                        "image/Profile_Default.png")
                                                     as ImageProvider
                                                 : FileImage(profileImage!),
                                           ),
@@ -145,9 +150,16 @@ class _HomePageState extends State<HomePage> {
                   ),
                   child: Row(
                     children: [
-                      const Expanded(
+                      Expanded(
                         child: TextField(
-                          decoration: InputDecoration(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SearchScreen(),
+                                ));
+                          },
+                          decoration: const InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
                             hintText: "Search",
@@ -163,13 +175,18 @@ class _HomePageState extends State<HomePage> {
                       ),
                       InkWell(
                         onTap: () {
-                          // Tambahkan aksi lar di sini
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SearchScreen(),
+                            ),
+                          );
                         },
                         child: Container(
                           padding: const EdgeInsets.symmetric(
                               vertical: 17, horizontal: 12),
                           decoration: const BoxDecoration(
-                            color: Colors.blue,
+                            color: Color(0xFF2C7C7D),
                             borderRadius: BorderRadius.only(
                               topRight: Radius.circular(10),
                               bottomRight: Radius.circular(10),
@@ -208,6 +225,10 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
+                   const SizedBox(
+                    height: 10,
+                   
+                  ),
                   // TODO: List Category
                   SizedBox(
                     height: 70,
@@ -231,18 +252,18 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   const Align(
                     alignment: Alignment.centerLeft,
-                    child: Text(
-                      "Product",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    child: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        "Product",
+                        style:
+                            TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                      ),
                     ),
                   ),
                   const SizedBox(
                     height: 20,
-                    child: Divider(
-                      color: Colors.black,
-                      thickness: 1,
-                    ),
+                   
                   ),
                   //TODO : List Product
                   FutureBuilder<List<Product>>(

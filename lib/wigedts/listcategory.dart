@@ -40,14 +40,14 @@ class _ListCategoryState extends State<ListCategory> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  widget.category.icon, // Akses dengan `widget`
-                  color: Colors.black,
+                  widget.category.icon, // Akses dengan widget
+                  color:  Color(0xFF2C7C7D),
                   size: 30,
                 ),
                 Text(
-                  widget.category.name, // Akses dengan `widget`
+                  widget.category.name, // Akses dengan widget
                   style: const TextStyle(
-                    fontWeight: FontWeight.w300,
+                    fontWeight: FontWeight.bold,
                     fontSize: 15,
                   ),
                 ),

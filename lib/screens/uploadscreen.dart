@@ -64,7 +64,7 @@ class _UploadScreenState extends State<UploadScreen> {
       return;
     }
 
-    final uri = Uri.parse("http://10.0.2.2:8000/api/items");
+    final uri = Uri.parse("http://192.168.200.231:8000/api/items");
     final request = http.MultipartRequest("POST", uri)
       ..fields['item_name'] = _productController.text
       ..fields['uploaded_by'] = _nameController.text
