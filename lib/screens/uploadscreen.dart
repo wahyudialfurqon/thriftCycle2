@@ -21,7 +21,7 @@ class _UploadScreenState extends State<UploadScreen> {
     "electronic",
     "stationary",
     "toys",
-    "sport",
+    "sports",
     "furniture",
   ];
 
