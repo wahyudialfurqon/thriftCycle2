@@ -280,7 +280,7 @@ class _HomePageState extends State<HomePage> {
                         /// Menampilkan error jika ada
                       } else if (snapshot.hasData) {
                         return SizedBox(
-                          height: 400,
+                          height: 500,
                           child: GridView.builder(
                             scrollDirection: Axis.vertical,
                             itemCount: snapshot.data!.length,

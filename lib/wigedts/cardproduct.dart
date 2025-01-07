@@ -14,6 +14,8 @@ class CardProduct extends StatefulWidget {
 class _CardProductState extends State<CardProduct> {
   @override
   Widget build(BuildContext context) {
+    print( 'https://res.cloudinary.com/dlyjohtpw/image/upload/${widget.product.imageUri}');
+
     return InkWell(
       onTap: () {
         Navigator.push(
@@ -44,7 +46,7 @@ class _CardProductState extends State<CardProduct> {
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Image.network(
-                "http://10.0.2.2:8000/storage/${widget.product.imageUri}",
+                   widget.product.imageUri,
                 width: 300,
                 height: 100,
                 fit: BoxFit.cover,
@@ -97,4 +99,5 @@ class _CardProductState extends State<CardProduct> {
       ),
     );
   }
+  
 }

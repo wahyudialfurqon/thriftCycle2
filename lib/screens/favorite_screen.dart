@@ -116,7 +116,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                             );
                           }
                           return SizedBox(
-                            height: 300,
+                            height: 800,
                             child: GridView.builder(
                               scrollDirection: Axis.vertical,
                               itemCount: favoriteProducts.length,

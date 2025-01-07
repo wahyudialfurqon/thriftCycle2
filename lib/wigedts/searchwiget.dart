@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import '../screens/detail_product.dart'; // Pastikan DetailProduct sudah diimpor
 
 class SearchWidget extends StatelessWidget {
-  final products; // List produk untuk ditampilkan
-  const SearchWidget({super.key, required this.products});
+  final product; // List produk untuk ditampilkan
+  const SearchWidget({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +13,8 @@ class SearchWidget extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => DetailProduct(
-                idProduct: products.id,
-                product: products,
+                idProduct: product.id,
+                product: product,
               ),
             ),
           );
@@ -39,15 +39,15 @@ class SearchWidget extends StatelessWidget {
                   borderRadius: const BorderRadius.vertical(
                     top: Radius.circular(12),
                   ),
-                  child: products.imageUri != "" && products.imageUri.isNotEmpty
+                  child: product.imageUri != "" && product.imageUri.isNotEmpty
                       ? Image.network(
-                          'http://10.0.2.2:8000/storage/${products.imageUri}',
-                          fit: BoxFit.cover,
-                          width: double.infinity,
-                          errorBuilder: (context, error, stackTrace) =>
-                              const Icon(Icons.broken_image,
-                                  size: 50, color: Colors.grey),
-                        )
+                        product.imageUri, // Menggunakan widget.product.imageUri yang sudah berisi URL lengkap
+                        width: 300, // Tentukan lebar gambar
+                        height: 100, // Tentukan tinggi gambar
+                        fit: BoxFit.cover, // Tentukan cara gambar di-fit
+                        errorBuilder: (context, error, stackTrace) =>
+                            const Icon(Icons.broken_image, size: 50, color: Colors.grey), // Penanganan kesalahan jika gambar tidak dapat dimuat
+                      )
                       : const Icon(Icons.image_not_supported,
                           size: 50, color: Colors.grey),
                 ),
@@ -55,7 +55,7 @@ class SearchWidget extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  products.item,
+                  product.item,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
@@ -67,7 +67,7 @@ class SearchWidget extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: Text(
-                  products.description ?? "No description available",
+                  product.description ?? "No description available",
                   style: TextStyle(
                     fontSize: 14,
                     color: Colors.grey[600],
