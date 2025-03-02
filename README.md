@@ -1,5 +1,5 @@
 
-![logo](https://github.com/wahyudialfrqn/wahyudialfrqn/blob/main/bannerThriftCycle.gif)
+![logo](https://github.com/wahyudialfurqon/wahyudialfurqon/blob/main/thriftCycleBanner.gif)
 <div>
   <h1>ThriftCycle</h1>
   <h2>Deskripsi</h2>
