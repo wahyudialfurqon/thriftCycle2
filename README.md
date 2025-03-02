@@ -26,10 +26,10 @@
   <h2>Instalasi dan Penggunaan</h2>
   <ol>
     <li><strong>Clone Repository</strong>
-      <pre><code>git clone https://github.com/MDP-Lesson/final-project-team-thriftcycle.git</code></pre>
+      <pre><code>git clone https://github.com/wahyudialfurqon/thriftCycle2.git</code></pre>
     </li>
     <li><strong>Masuk ke Direktori</strong>
-      <pre><code>cd final-project-team-thriftcycle</code></pre>
+      <pre><code>cd thriftCycle2</code></pre>
     </li>
     <li><strong>Pasang Dependency</strong>
       <pre><code>flutter pub get</code></pre>
